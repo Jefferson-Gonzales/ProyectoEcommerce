@@ -1,5 +1,6 @@
 package com.proyecto.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,12 @@ public class ProductoServiceImpl implements ProductoService{
 	@Override
 	public void delete(Integer id) {
 		productoRepository.deleteById(id);
+	}
+
+	//Metodp para listar los datos
+	@Override
+	public List<Producto> findAll() {
+		return productoRepository.findAll();
 	}
 
 }
