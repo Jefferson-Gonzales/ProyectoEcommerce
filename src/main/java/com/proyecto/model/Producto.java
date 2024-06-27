@@ -1,6 +1,17 @@
 package com.proyecto.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "productos")
 public class Producto {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private String description;
@@ -8,16 +19,21 @@ public class Producto {
 	private double price;
 	private int quantity;
 	
+	@ManyToOne
+	private Usuario usuario;
+	
 	public Producto() {
 	}
-	
-	public Producto(Integer id, String name, String description, String image, double price, int quantity) {
+
+	public Producto(Integer id, String name, String description, String image, double price, int quantity,
+			Usuario usuario) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.image = image;
 		this.price = price;
 		this.quantity = quantity;
+		this.usuario = usuario;
 	}
 
 	public Integer getId() {
@@ -66,6 +82,14 @@ public class Producto {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override
