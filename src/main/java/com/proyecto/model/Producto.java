@@ -13,11 +13,11 @@ public class Producto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String name;
-	private String description;
-	private String image;
-	private double price;
-	private int quantity;
+	private String nombre;
+	private String descripcion;
+	private String imagen;
+	private double precio;
+	private int cantidad;
 	
 	@ManyToOne
 	private Usuario usuario;
@@ -25,14 +25,14 @@ public class Producto {
 	public Producto() {
 	}
 
-	public Producto(Integer id, String name, String description, String image, double price, int quantity,
+	public Producto(Integer id, String nombre, String descripcion, String imagen, double precio, int cantidad,
 			Usuario usuario) {
 		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.image = image;
-		this.price = price;
-		this.quantity = quantity;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.imagen = imagen;
+		this.precio = precio;
+		this.cantidad = cantidad;
 		this.usuario = usuario;
 	}
 
@@ -44,44 +44,44 @@ public class Producto {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
-	public String getImage() {
-		return image;
+	public String getImagen() {
+		return imagen;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
-	public double getPrice() {
-		return price;
+	public double getPrecio() {
+		return precio;
 	}
 
-	public void setPrice(double price) {
-		this.price = price;
+	public void setPrecio(double precio) {
+		this.precio = precio;
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public int getCantidad() {
+		return cantidad;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
 	}
 
 	public Usuario getUsuario() {
@@ -94,7 +94,7 @@ public class Producto {
 
 	@Override
 	public String toString() {
-		return "Producto [id=" + id + ", name=" + name + ", description=" + description + ", image=" + image
-				+ ", price=" + price + ", quantity=" + quantity + "]";
+		return "Producto [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", imagen=" + imagen
+				+ ", precio=" + precio + ", cantidad=" + cantidad + ", usuario=" + usuario + "]";
 	}
 }
