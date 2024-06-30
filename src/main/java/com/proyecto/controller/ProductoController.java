@@ -1,5 +1,6 @@
 package com.proyecto.controller;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import org.slf4j.*;
@@ -10,10 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.proyecto.model.Producto;
 import com.proyecto.model.Usuario;
 import com.proyecto.service.ProductoService;
+import com.proyecto.service.UploadFileService;
 
 
 @Controller
@@ -24,6 +28,9 @@ public class ProductoController {
 	
 	@Autowired
 	private ProductoService productoService;
+	
+	@Autowired
+	private UploadFileService uploadService;
 	
 	@GetMapping("")
 	public String show(Model model) {
@@ -38,11 +45,26 @@ public class ProductoController {
 	}
 	
 	@PostMapping("/save")
-	public String save(Producto producto) {
+	public String save(Producto producto, @RequestParam("img") MultipartFile file) throws IOException {
 		LOGGER.info("Este es el objeto de producto {}",producto);
 		Usuario us = new Usuario(1,"","","","","","","");
 		
 		producto.setUsuario(us);
+		
+		//Cargar Imagen
+		if(producto.getId() == null) {
+			String nombreImagen = uploadService.saveImage(file);
+			producto.setImagen(nombreImagen);
+		}else {
+			if(file.isEmpty()) {
+				Producto p = new Producto();
+				p = productoService.get(producto.getId()).get();
+				producto.setImagen(p.getImagen());
+			}else {
+				String nombreImagen = uploadService.saveImage(file);
+				producto.setImagen(nombreImagen);
+			}
+		}
 		
 		productoService.save(producto);
 		return "redirect:/productos";
