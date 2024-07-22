@@ -5,7 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,26 +13,27 @@ public class DetalleOrden {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String name;
-	private double quantity;
-	private double price;
+	private String nombre;
+	private double cantidad;
+	private double precio;
 	private double total;
-	
-	@OneToOne
+
+	@ManyToOne
 	private Orden orden;
-	
+
 	@ManyToOne
 	private Producto producto;
-	
+
 	public DetalleOrden() {
-		
+
 	}
 
-	public DetalleOrden(Integer id, String name, double quantity, double price, double total) {
+	public DetalleOrden(Integer id, String nombre, double cantidad, double precio, double total) {
+		super();
 		this.id = id;
-		this.name = name;
-		this.quantity = quantity;
-		this.price = price;
+		this.nombre = nombre;
+		this.cantidad = cantidad;
+		this.precio = precio;
 		this.total = total;
 	}
 
@@ -45,28 +45,28 @@ public class DetalleOrden {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public double getQuantity() {
-		return quantity;
+	public double getCantidad() {
+		return cantidad;
 	}
 
-	public void setQuantity(double quantity) {
-		this.quantity = quantity;
+	public void setCantidad(double cantidad) {
+		this.cantidad = cantidad;
 	}
 
-	public double getPrice() {
-		return price;
+	public double getPrecio() {
+		return precio;
 	}
 
-	public void setPrice(double price) {
-		this.price = price;
+	public void setPrecio(double precio) {
+		this.precio = precio;
 	}
 
 	public double getTotal() {
@@ -95,7 +95,7 @@ public class DetalleOrden {
 
 	@Override
 	public String toString() {
-		return "DetalleOrden [id=" + id + ", name=" + name + ", quantity=" + quantity + ", price=" + price + ", total="
-				+ total + "]";
+		return "DetalleOrden{" + "id=" + id + ", nombre='" + nombre + '\'' + ", cantidad=" + cantidad + ", precio="
+				+ precio + ", total=" + total + ", orden=" + orden + ", producto=" + producto + '}';
 	}
 }
